@@ -2,7 +2,9 @@ import React, { useState, useEffect, useReducer } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
-const Form = ({ create }) => {
+//TODO: separate into component files (form and list to start with)
+
+const Form = setRecipes => {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -17,10 +19,16 @@ const Form = ({ create }) => {
     setUserInput({ [key]: newValue });
   };
 
-  ////////createRecipe ========= onSubmit={createRecipe}
+  const createRecipe = ev => {
+    ev.preventDefault();
+    console.log("front end in submit function:", userInput);
+    axios
+      .post("/api/recipes", { userInput })
+      .then(response => setRecipes([response.data, ...recipes]));
+  };
 
   return (
-    <form>
+    <form onSubmit={createRecipe}>
       <br />
       <label>Recipe Title</label>
       <input type="text" value={userInput.title} onChange={onChange("title")} />
@@ -43,7 +51,15 @@ const Form = ({ create }) => {
   );
 };
 
-const List = ({ recipes, destroy }) => {
+const List = ({ recipes, setRecipes }) => {
+  const destroy = id => {
+    axios
+      .delete(`/api/recipes/${id}`)
+      .then(response => response.data)
+      .then(() => {
+        setRecipes(recipes.filter(n => n.id !== id));
+      });
+  };
   return (
     <div>
       <div>
@@ -69,9 +85,9 @@ const List = ({ recipes, destroy }) => {
 const App = () => {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState("");
-  const [title, setTitle] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [ingredients, setIngredients] = useState("");
+  // const [instructions, setInstructions] = useState("");
 
   useEffect(() => {
     axios
@@ -80,30 +96,14 @@ const App = () => {
       .catch(ex => console.log(ex.response.data));
   }, []);
 
-  const create = ev => {
-    ev.preventDefault();
-    axios
-      .post("/api/recipes", { title, ingredients, instructions })
-      .then(response => setRecipes([response.data, ...todos]));
-  };
-
-  const destroy = id => {
-    axios
-      .delete(`/api/recipes/${id}`)
-      .then(response => response.data)
-      .then(() => {
-        setRecipes(todos.filter(n => n.id !== id));
-      });
-  };
-
   return (
     <div className="App">
       <h1>Recipe App</h1>
       <div>
-        <Form create={create} />
+        <Form setRecipes={setRecipes} />
       </div>
       <div>
-        <List destroy={destroy} recipes={recipes} />
+        <List recipes={recipes} setRecipes={setRecipes} />
       </div>
     </div>
   );

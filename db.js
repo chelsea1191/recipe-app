@@ -15,9 +15,9 @@ const sync = async () => {
   (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     date_create DATE NOT NULL default CURRENT_DATE,
-    title VARCHAR(100) NOT NULL,
-    ingredients VARCHAR(400) NOT NULL,
-    instructions VARCHAR NOT NULL,
+    title VARCHAR(100),
+    ingredients VARCHAR(400),
+    instructions VARCHAR,
     CHECK (char_length(title) > 0)
   );
   INSERT INTO recipes (title, ingredients, instructions) VALUES ('bettys banana bread', 'eggs, bananas, flour, butter', 'combine all dry ingredients, combine all wet ingredients, combine together and bake at 350 degrees for 25 minutes');
