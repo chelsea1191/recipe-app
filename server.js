@@ -20,30 +20,30 @@ app.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get("/api/todos", async (req, res, next) => {
+app.get("/api/recipes", async (req, res, next) => {
   await db
-    .readTodos()
-    .then(todos => res.send(todos))
+    .readRecipes()
+    .then(recipes => res.send(recipes))
     .catch(next);
 });
 
 //////////////////post////////////////////
-app.post("/api/todos", (req, res, next) => {
-  db.createTodo(req.body)
-    .then(todo => res.send(todo))
+app.post("/api/recipes", (req, res, next) => {
+  db.createRecipe(req.body)
+    .then(recipe => res.send(recipe))
     .catch(next);
 });
 
 //////////////////delete////////////////////
-app.delete("/api/todos/:id", (req, res, next) => {
-  db.deleteTodo(req.params.id)
+app.delete("/api/recipes/:id", (req, res, next) => {
+  db.deleteRecipe(req.params.id)
     .then(() => res.sendStatus(204)) //since no return
     .catch(next);
 });
 
 //////////////////put//////////////////////
-app.put("/api/todos/:id", (req, res, next) => {
-  db.updateTodo(req.params.id)
+app.put("/api/recipes/:id", (req, res, next) => {
+  db.updateRecipe(req.params.id)
     .then(todo => res.send(todo))
     .catch(next);
 });

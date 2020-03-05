@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const List = ({ toggle, todos, destroy }) => {
+const List = ({ recipes, destroy }) => {
   return (
-    <div id="paper">
-      <div id="pattern">
-        <ul id="content">
-          {todos.map(todo => {
+    <div>
+      <div>
+        <ul>
+          {recipes.map(recipe => {
             return (
-              <li className={todo.completed ? "archived" : ""} key={todo.id}>
-                <span onClick={() => toggle(todo.id)}>
-                  {todo.text} ------> due on: {todo.due.substr(0, 10)}
-                </span>
-                <button onClick={() => destroy(todo.id)}>Delete</button>
+              <li key={recipe.id}>
+                <span>{recipe.title}</span>
+                <button onClick={() => destroy(recipe.id)}>Delete</button>
               </li>
             );
           })}
@@ -23,71 +21,55 @@ const List = ({ toggle, todos, destroy }) => {
 };
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState("");
-  const [text, setText] = useState("");
-  const [due_date, setDate] = useState("");
+  const [title, setTitle] = useState("");
+  const [ingredients, SetIngredients] = useState("");
+  const [instructions, SetInstructions] = useState("");
 
   useEffect(() => {
     axios
-      .get("/api/todos")
-      .then(response => setTodos(response.data))
+      .get("/api/recipes")
+      .then(response => setRecipes(response.data))
       .catch(ex => console.log(ex.response.data));
   }, []);
 
   const create = ev => {
     ev.preventDefault();
     axios
-      .post("/api/todos", { text, due_date })
-      .then(response => setTodos([response.data, ...todos]));
+      .post("/api/recipes", { title, ingredients, instructions })
+      .then(response => setRecipes([response.data, ...todos]));
   };
 
   const destroy = id => {
     axios
-      .delete(`/api/todos/${id}`)
+      .delete(`/api/recipes/${id}`)
       .then(response => response.data)
       .then(() => {
-        setTodos(todos.filter(n => n.id !== id));
+        setRecipes(todos.filter(n => n.id !== id));
       });
-  };
-
-  const toggle = id => {
-    axios
-      .put(`/api/todos/${id}`)
-      .then(response => response.data)
-      .then(() =>
-        axios.get("/api/todos").then(response => setTodos(response.data))
-      );
   };
 
   return (
     <div className="App">
-      <h1>To-Do List</h1>
+      <h1>Recipe App</h1>
       <div>
         <div className="form">
           <form onSubmit={create}>
             <input
               type="text"
-              value={text}
-              placeholder="type in new task here"
-              onChange={ev => setText(ev.target.value)}
-            />
-            <input
-              type="date"
-              defaultValue="2020-02-29"
-              onChange={ev => {
-                //console.log(ev.target.value);
-                setDate(ev.target.value);
-              }}
+              value={title}
+              placeholder="recipe title"
+              onChange={ev => setTitle(ev.target.value)}
             />
             <button className="button" disabled={!text}>
-              Create
+              Submit
             </button>
           </form>
         </div>
       </div>
       <div>
-        <List toggle={toggle} todos={todos} destroy={destroy} />
+        <List recipes={recipes} destroy={destroy} />
       </div>
     </div>
   );

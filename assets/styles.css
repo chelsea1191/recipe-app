@@ -75,7 +75,7 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-#paper {
+.paper {
   width: 750px;
   height: 700px;
   position: relative;
@@ -86,7 +86,7 @@ body {
   box-shadow: 0px 0px 5px 0px #888;
 }
 
-#paper::before {
+.paper::before {
   content: "";
   width: 2px;
   height: 100%;
@@ -96,12 +96,12 @@ body {
   background-color: rgba(255, 0, 0, 0.6);
 }
 
-#pattern {
+.pattern {
   height: 100%;
   background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
 }
 
-#content {
+.content {
   padding-top: 6px;
   padding-left: 56px;
   padding-right: 16px;
