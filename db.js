@@ -2,7 +2,7 @@ const pg = require("pg");
 const { Client } = pg;
 const uuid = require("uuid/v4");
 const client = new Client(
-  process.env.DATABASE_URL || "postgres://localhost/recipes"
+  process.env.DATABASE_URL || "postgres://localhost/recipes2"
 );
 
 client.connect();
@@ -15,8 +15,8 @@ const sync = async () => {
   (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     date_create DATE NOT NULL default CURRENT_DATE,
-    title VARCHAR(100),
-    ingredients VARCHAR(400),
+    title VARCHAR(255),
+    ingredients VARCHAR,
     instructions VARCHAR,
     CHECK (char_length(title) > 0)
   );

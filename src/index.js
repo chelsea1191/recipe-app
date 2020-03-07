@@ -4,7 +4,7 @@ import axios from "axios";
 
 //TODO: separate into component files (form and list to start with)
 
-const Form = setRecipes => {
+const Form = (setRecipes, recipes) => {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -100,7 +100,7 @@ const App = () => {
     <div className="App">
       <h1>Recipe App</h1>
       <div>
-        <Form setRecipes={setRecipes} />
+        <Form recipes={recipes} setRecipes={setRecipes} />
       </div>
       <div>
         <List recipes={recipes} setRecipes={setRecipes} />
