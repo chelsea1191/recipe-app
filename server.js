@@ -29,7 +29,6 @@ app.get("/api/recipes", async (req, res, next) => {
 
 //////////////////post////////////////////
 app.post("/api/recipes", (req, res, next) => {
-  console.log("server side:", req);
   db.createRecipe(req.body)
     .then(recipe => res.send(recipe))
     .catch(next);

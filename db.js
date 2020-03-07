@@ -34,9 +34,13 @@ const readRecipes = async () => {
 };
 
 //////////////////post///////////////////
-const createRecipe = async ({ title, ingredients, instructions }) => {
+const createRecipe = async ({ userInput }) => {
   const SQL = `INSERT INTO recipes (title, ingredients, instructions) VALUES ($1, $2, $3) returning *;`;
-  const response = await client.query(SQL, [title, ingredients, instructions]);
+  const response = await client.query(SQL, [
+    userInput.title,
+    userInput.ingredients,
+    userInput.instructions
+  ]);
   return response.rows[0];
 };
 
