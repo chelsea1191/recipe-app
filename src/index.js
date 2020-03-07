@@ -27,26 +27,36 @@ const Form = ({ setRecipes, recipes }) => {
   };
 
   return (
-    <form onSubmit={createRecipe}>
-      <br />
-      <label>Recipe Title</label>
-      <input type="text" value={userInput.title} onChange={onChange("title")} />
-      <br />
-      <label>Ingredients</label>
-      <input
-        type="text"
-        value={userInput.ingredients}
-        onChange={onChange("ingredients")}
-      />
-      <br />
-      <label>Instructions</label>
-      <input
-        type="text"
-        value={userInput.instructions}
-        onChange={onChange("instructions")}
-      />
-      <input type="submit" value="create new recipe" />
-    </form>
+    <div className="container">
+      <form onSubmit={createRecipe}>
+        <label>Recipe Title</label>
+        <input
+          type="text"
+          value={userInput.title}
+          onChange={onChange("title")}
+        />
+        <br />
+        <label>Ingredients</label>
+        <input
+          type="text"
+          value={userInput.ingredients}
+          onChange={onChange("ingredients")}
+        />
+        <br />
+        <label>Instructions</label>
+        <input
+          type="text"
+          value={userInput.instructions}
+          onChange={onChange("instructions")}
+        />
+        <br />
+        <input
+          type="submit"
+          className="btn btn-outline-success"
+          value="create new recipe"
+        />
+      </form>
+    </div>
   );
 };
 
@@ -61,26 +71,56 @@ const List = ({ recipes, setRecipes }) => {
   };
   return (
     <div className="container">
-      <div>
-        <ul>
-          <div>
-            {recipes.map(recipe => {
-              return (
-                <div>
-                  <div key={recipe.id} className="card">
-                    <div className="card_title">
-                      <span className="text_title">{recipe.title}</span>
-                    </div>
-                    <div>ingredients: {recipe.ingredients}</div>
-                    <div>instructions: {recipe.instructions}</div>
-                  </div>
-                  <button onClick={() => destroy(recipe.id)}>delete</button>
+      <ul>
+        {recipes.map(recipe => {
+          return (
+            <div>
+              <div key={recipe.id} className="card">
+                <div className="card_title">
+                  <span className="recipe_title">{recipe.title}</span>
                 </div>
-              );
-            })}
-          </div>
-        </ul>
-      </div>
+                <div>
+                  <span className="ingredient_title">ingredients:</span>
+                  <span>{recipe.ingredients}</span>
+                </div>
+                <div>
+                  <span className="instruction_title">instructions: </span>
+                  <span>{recipe.instructions}</span>
+                </div>
+
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenu2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Action
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenu2"
+                  >
+                    <button
+                      type="submit"
+                      value="delete"
+                      className="dropdown-item"
+                      onClick={() => destroy(recipe.id)}
+                    >
+                      delete
+                    </button>
+                    <button type="submit" value="edit" class="dropdown-item">
+                      edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 };
@@ -99,11 +139,20 @@ const App = () => {
   return (
     <div className="App">
       <h1>Recipe App</h1>
-      <div>
-        <Form recipes={recipes} setRecipes={setRecipes} />
+      <div className="container">
+        <div>
+          <Form recipes={recipes} setRecipes={setRecipes} />
+        </div>
+        <div>
+          <List recipes={recipes} setRecipes={setRecipes} />
+        </div>
       </div>
-      <div>
-        <List recipes={recipes} setRecipes={setRecipes} />
+      <div className="media">
+        <img className="img-thumbnail" src="./assets/me.jpg" />
+        <div className="media-body">
+          <h5 className="mt-0">Developed by: Chelsea Kramer</h5>
+          <p>Student at UNF Coding Bootcamp</p>
+        </div>
       </div>
     </div>
   );

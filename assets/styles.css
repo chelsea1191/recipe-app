@@ -1,7 +1,7 @@
-/* body {
-  font-family: papyrus;
+body {
   margin: 10px;
-} */
+  background-color: F0F3F6;
+}
 
 main {
   display: flex;
@@ -18,7 +18,7 @@ nav {
   margin-bottom: 1rem;
 }
 
-button {
+/* button {
   height: 1rem;
   font-size: 0.5rem;
   margin: 10px;
@@ -26,12 +26,12 @@ button {
   color: black;
   border-radius: 4px;
   transition-duration: 0.2s;
-}
+} */
 
-button:hover {
-  background-color: #4caf50; /* Green */
+/* button:hover {
+  background-color: #4caf50;
   color: white;
-}
+}  */
 
 form {
   text-align: center;
@@ -44,10 +44,10 @@ input[type="text"] {
   margin: 8px 0;
   box-sizing: border-box;
 }
-input[type="submit"]:hover {
-  background-color: #4caf50; /* Green */
+/* input[type="submit"]:hover {
+  background-color: #4caf50;
   color: white;
-}
+} */
 
 h1 {
   text-align: center;
@@ -58,24 +58,23 @@ ul {
   list-style-type: circle;
 }
 
-.flex {
-  display: flex;
-  border: solid 2px teal;
-  border-radius: 3rem;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem;
+.img-thumbnail {
+  height: 70px;
+  width: 70px;
+  border-radius: 40px;
 }
 
 .archived span {
   text-decoration: line-through;
 }
+
 .card {
-  background: #f0fff0;
+  background: #bfdbff;
   box-shadow: 6px 6px 5px gray;
   width: 490px;
   height: 300px;
-  padding: 5px;
+  padding: 10px;
+  margin: 20px;
 }
 .card_title {
   height: 60px;
@@ -83,9 +82,17 @@ ul {
   position: relative;
 }
 
-.text_title {
+.recipe_title {
   font-size: 2em;
   bottom: 0;
   position: relative;
+  font-weight: bold;
+}
+.ingredient_title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.instruction_title {
+  font-size: 1rem;
   font-weight: bold;
 }
