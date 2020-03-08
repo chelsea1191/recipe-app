@@ -4,7 +4,7 @@ import axios from "axios";
 
 //TODO: separate into component files (form and list to start with)
 
-const Form = ({ setRecipes, recipes }) => {
+const Form = ({ setRecipes, recipes, ingredients, setIngredients }) => {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -15,15 +15,23 @@ const Form = ({ setRecipes, recipes }) => {
   );
 
   const onChange = key => ev => {
-    const newValue = ev.target.value;
+    var newValue = ev.target.value;
     setUserInput({ [key]: newValue });
   };
 
   const createRecipe = ev => {
+    console.log("from front end:", userInput);
     ev.preventDefault();
     axios
       .post("/api/recipes", { userInput })
       .then(response => setRecipes([...recipes, response.data]));
+    // axios
+    //   .post("/api/ingredients", { userInput })
+    //   .then(
+    //     axios
+    //       .get("/api/ingredients")
+    //       .then(response => console.log(response.data))
+    //   );
   };
 
   return (
@@ -60,7 +68,7 @@ const Form = ({ setRecipes, recipes }) => {
   );
 };
 
-const List = ({ recipes, setRecipes }) => {
+const List = ({ recipes, setRecipes, ingredients, setIngredients }) => {
   const destroy = id => {
     axios
       .delete(`/api/recipes/${id}`)
@@ -69,13 +77,16 @@ const List = ({ recipes, setRecipes }) => {
         setRecipes(recipes.filter(n => n.id !== id));
       });
   };
+  const edit = userInput => {
+    console.log(userInput);
+  };
   return (
     <div className="container">
       <ul>
         {recipes.map(recipe => {
           return (
-            <div>
-              <div key={recipe.id} className="card">
+            <div key={recipe.id}>
+              <div className="card">
                 <div className="card_title">
                   <span className="recipe_title">{recipe.title}</span>
                 </div>
@@ -111,7 +122,12 @@ const List = ({ recipes, setRecipes }) => {
                     >
                       delete
                     </button>
-                    <button type="submit" value="edit" class="dropdown-item">
+                    <button
+                      type="submit"
+                      value="edit"
+                      className="dropdown-item"
+                      onClick={() => edit("clicked edit")}
+                    >
                       edit
                     </button>
                   </div>
@@ -124,10 +140,18 @@ const List = ({ recipes, setRecipes }) => {
     </div>
   );
 };
+// <span>
+//   {ingredients
+//     .filter(ing => ing.recipe_id === recipe.id)
+//     .map(ing => {
+//       console.log(ing);
+//       return <span key={ing.id}> {ing.text}, </span>;
+//     })}
+// </span>;
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);
-  const [error, setError] = useState("");
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     axios
@@ -135,24 +159,37 @@ const App = () => {
       .then(response => setRecipes(response.data))
       .catch(ex => console.log(ex.response.data));
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/ingredients")
+  //     .then(response => setIngredients(response.data))
+  //     .catch(ex => console.log(ex.response.data));
+  // }, []);
 
   return (
     <div className="App">
       <h1>Recipe App</h1>
       <div className="container">
         <div>
-          <Form recipes={recipes} setRecipes={setRecipes} />
+          <Form
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            recipes={recipes}
+            setRecipes={setRecipes}
+          />
         </div>
         <div>
-          <List recipes={recipes} setRecipes={setRecipes} />
+          <List
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            recipes={recipes}
+            setRecipes={setRecipes}
+          />
         </div>
       </div>
       <div className="media">
         <img className="img-thumbnail" src="./assets/me.jpg" />
-        <div className="media-body">
-          <h5 className="mt-0">Developed by: Chelsea Kramer</h5>
-          <p>Student at UNF Coding Bootcamp</p>
-        </div>
+        <p className="mt-0">Developed by: Chelsea Kramer</p>
       </div>
     </div>
   );
