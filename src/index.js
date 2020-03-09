@@ -88,7 +88,8 @@ const List = ({ recipes, setRecipes, ingredients, setIngredients }) => {
             <div key={recipe.id}>
               <div className="card">
                 <div className="card_title">
-                  <span className="recipe_title">{recipe.title}</span>
+                  <img className="img-thumbnail" src="./assets/icon.png" />
+                  <span className="recipe_title"> {recipe.title}</span>
                 </div>
                 <div>
                   <span className="ingredient_title">ingredients:</span>
