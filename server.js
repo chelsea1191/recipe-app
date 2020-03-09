@@ -54,13 +54,13 @@ app.delete("/api/recipes/:id", (req, res, next) => {
 });
 
 //////////////////put//////////////////////
-app.put("/api/recipes/:id", (req, res, next) => {
-  db.updateRecipe(req.params.id)
-    .then(todo => res.send(todo))
+app.put("/api/recipes/", (req, res, next) => {
+  db.updateRecipe(req.body.id, req.body.rating)
+    .then(recipes => res.send(recipes))
     .catch(next);
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 db.sync()
   .then(() => {

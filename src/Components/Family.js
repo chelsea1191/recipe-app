@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Form from "./Form.js";
+import shortid from "shortid";
+import Rating from "./Rating.js";
 
 const Family = ({ recipes, setRecipes }) => {
   const destroy = id => {
@@ -11,15 +13,22 @@ const Family = ({ recipes, setRecipes }) => {
         setRecipes(recipes.filter(n => n.id !== id));
       });
   };
-  const edit = userInput => {
-    console.log(userInput);
+  const edit = async (e, recipe) => {
+    let rating = e.target.previousElementSibling.value;
+    let id = recipe.id;
+    await axios.put(`/api/recipes`, { id, rating }).then(response => {
+      setRecipes([
+        ...recipes.filter(recipe => recipe.id !== id),
+        response.data
+      ]);
+    });
   };
   const convertToArray = input => {
     const converted = input.split(",");
     return (
       <div>
         {converted.map(each => {
-          return <li>{each}</li>;
+          return <li key={shortid.generate()}>{each}</li>;
         })}
       </div>
     );
@@ -44,7 +53,7 @@ const Family = ({ recipes, setRecipes }) => {
                   <span className="instruction_title">instructions: </span>
                   <span>{recipe.instructions}</span>
                 </div>
-
+                <Rating edit={edit} recipe={recipe} />
                 <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle"
@@ -67,14 +76,6 @@ const Family = ({ recipes, setRecipes }) => {
                       onClick={() => destroy(recipe.id)}
                     >
                       delete
-                    </button>
-                    <button
-                      type="submit"
-                      value="edit"
-                      className="dropdown-item"
-                      onClick={() => edit("clicked edit")}
-                    >
-                      edit
                     </button>
                   </div>
                 </div>
