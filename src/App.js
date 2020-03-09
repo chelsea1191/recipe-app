@@ -5,6 +5,7 @@ import Chicken from "./Components/Chicken.js";
 import Beef from "./Components/Beef.js";
 import Veggie from "./Components/Veggie.js";
 import Home from "./Components/Home.js";
+import Search from "./Components/Search.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const App = () => {
@@ -12,6 +13,10 @@ const App = () => {
   const [chicken, setChicken] = useState([]);
   const [beef, setBeef] = useState([]);
   const [veggie, setVeggie] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [searched, setSearched] = useState([]);
+
   const APP_ID = "2224879b";
   const APP_KEY = "645ea4ee77c571427c20ed96020a75bf";
 
@@ -48,6 +53,15 @@ const App = () => {
       .catch(ex => console.log(ex.response.data));
   }, []);
 
+  const updateSearch = e => {
+    setSearch(e.target.value);
+  };
+
+  const getSearch = e => {
+    e.preventDefault();
+    setQuery(search);
+    setSearch("");
+  };
   return (
     <div className="App">
       <Router>
@@ -68,6 +82,9 @@ const App = () => {
             <li className="nav-link">
               <Link to="/veggie">Veggie</Link>
             </li>
+            <li className="nav-link">
+              <Link to="/search">Search</Link>
+            </li>
           </nav>
           <Switch>
             <Route path="/family">
@@ -81,6 +98,20 @@ const App = () => {
             </Route>
             <Route path="/veggie">
               <Veggie veggie={veggie} />
+            </Route>
+            <Route path="/search">
+              <Search
+                search={search}
+                setSearch={setSearch}
+                query={query}
+                setQuery={setQuery}
+                updateSearch={updateSearch}
+                getSearch={getSearch}
+                searched={searched}
+                setSearched={setSearched}
+                APP_ID={APP_ID}
+                APP_KEY={APP_KEY}
+              />
             </Route>
             <Route path="/">
               <Home />
