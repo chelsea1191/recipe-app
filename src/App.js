@@ -21,7 +21,6 @@ const App = () => {
     );
     const data = await response.json();
     setChicken(data.hits);
-    console.log(data.hits[0]);
   };
   const getBeefRecipes = async () => {
     const response = await fetch(
@@ -89,9 +88,11 @@ const App = () => {
           </Switch>
         </div>
       </Router>
-      <div className="container"></div>
       <div className="media">
-        <img className="img-thumbnail" src="./assets/me.jpg" />
+        <img
+          className="img-thumbnail align-self-end mr-3"
+          src="./assets/me.jpg"
+        />
         <p className="mt-0">developed by: chelsea</p>
       </div>
     </div>

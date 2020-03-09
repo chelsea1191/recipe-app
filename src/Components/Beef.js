@@ -2,7 +2,7 @@ import React from "react";
 
 const Beef = ({ beef }) => {
   return (
-    <div className="container">
+    <div className="container-fluid">
       {beef.map(each => {
         return (
           <div className="card" key={each.recipe.calories}>

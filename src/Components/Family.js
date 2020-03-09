@@ -13,7 +13,6 @@ const Family = ({ recipes, setRecipes }) => {
   };
   const edit = userInput => {
     console.log(userInput);
-    console.log(recipes[0].ingredients);
   };
   const convertToArray = input => {
     const converted = input.split(",");
@@ -26,7 +25,7 @@ const Family = ({ recipes, setRecipes }) => {
     );
   };
   return (
-    <div className="container">
+    <div className="container-fluid">
       <Form recipes={recipes} setRecipes={setRecipes} />
       <ul>
         {recipes.map(recipe => {
