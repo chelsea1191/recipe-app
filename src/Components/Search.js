@@ -6,8 +6,6 @@ const Search = ({
   updateSearch,
   search,
   query,
-  setSearch,
-  setQuery,
   setSearched,
   searched,
   APP_ID,
@@ -27,15 +25,20 @@ const Search = ({
 
   return (
     <div>
-      <form className="form-inline" onSubmit={getSearch}>
+      <form className="form" onSubmit={getSearch}>
         <input
-          className="form-control mr-sm-2"
+          className="form-control"
           type="text"
           placeholder="Search"
           aria-label="Search"
           value={search}
           onChange={updateSearch}
+          aria-describedby="emailHelp"
         />
+
+        <small id="emailHelp" className="form-text text-muted">
+          Search Edamam API for recipes here
+        </small>
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button>

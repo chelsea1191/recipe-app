@@ -36,6 +36,7 @@ const Form = ({ recipes, setRecipes }) => {
         <label>Ingredients</label>
         <input
           type="text"
+          placeholder="separate ingredients with a comma"
           value={userInput.ingredients}
           onChange={onChange("ingredients")}
         />

@@ -86,6 +86,7 @@ const App = () => {
               <Link to="/search">Search</Link>
             </li>
           </nav>
+          <hr />
           <Switch>
             <Route path="/family">
               <Family recipes={recipes} setRecipes={setRecipes} />
@@ -102,9 +103,7 @@ const App = () => {
             <Route path="/search">
               <Search
                 search={search}
-                setSearch={setSearch}
                 query={query}
-                setQuery={setQuery}
                 updateSearch={updateSearch}
                 getSearch={getSearch}
                 searched={searched}
