@@ -1,5 +1,4 @@
 import React from "react";
-import shortid from "shortid";
 
 const Veggie = ({ veggie }) => {
   return (
@@ -14,7 +13,7 @@ const Veggie = ({ veggie }) => {
             <ul>
               <span className="ingredient_title">ingredients:</span>
               {each.recipe.ingredientLines.map(ing => {
-                return <li key={shortid.generate()}>{ing}</li>;
+                return <li>{ing}</li>;
               })}
             </ul>
             <a href={each.recipe.url} target="_blank">

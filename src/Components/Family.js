@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import Form from "./Form.js";
-import shortid from "shortid";
 
 const Family = ({ recipes, setRecipes }) => {
   const destroy = id => {
@@ -21,7 +20,7 @@ const Family = ({ recipes, setRecipes }) => {
     return (
       <div>
         {converted.map(each => {
-          return <li key={shortid.generate()}>{each}</li>;
+          return <li>{each}</li>;
         })}
       </div>
     );
