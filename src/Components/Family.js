@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Form from "./Form.js";
+import shortid from "shortid";
 
 const Family = ({ recipes, setRecipes }) => {
   const destroy = id => {
@@ -12,9 +14,21 @@ const Family = ({ recipes, setRecipes }) => {
   };
   const edit = userInput => {
     console.log(userInput);
+    console.log(recipes[0].ingredients);
+  };
+  const convertToArray = input => {
+    const converted = input.split(",");
+    return (
+      <div>
+        {converted.map(each => {
+          return <li key={shortid.generate()}>{each}</li>;
+        })}
+      </div>
+    );
   };
   return (
     <div className="container">
+      <Form recipes={recipes} setRecipes={setRecipes} />
       <ul>
         {recipes.map(recipe => {
           return (
@@ -26,7 +40,7 @@ const Family = ({ recipes, setRecipes }) => {
                 </div>
                 <div>
                   <span className="ingredient_title">ingredients:</span>
-                  <span>{recipe.ingredients}</span>
+                  <span>{convertToArray(recipe.ingredients)}</span>
                 </div>
                 <div>
                   <span className="instruction_title">instructions: </span>

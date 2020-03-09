@@ -1,7 +1,7 @@
 import React, { useState, useReducer } from "react";
 import axios from "axios";
 
-const Form = () => {
+const Form = ({ recipes, setRecipes }) => {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
