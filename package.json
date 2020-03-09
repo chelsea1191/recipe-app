@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "bootstrap-icons": "^1.0.0-alpha2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "https": "^1.0.0",

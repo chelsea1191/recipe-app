@@ -34,23 +34,23 @@ const Family = ({ recipes, setRecipes }) => {
     );
   };
   return (
-    <div className="container-fluid">
+    <div className="container">
       <Form recipes={recipes} setRecipes={setRecipes} />
       <ul>
         {recipes.map(recipe => {
           return (
             <div key={recipe.id}>
-              <div className="card">
-                <div className="card_title">
+              <div className="jumbotron" id="card">
+                <div className="inline">
                   <img className="img-thumbnail" src="./assets/icon.png" />
-                  <span className="recipe_title"> {recipe.title}</span>
+                  <h1> {recipe.title}</h1>
                 </div>
                 <div>
-                  <span className="ingredient_title">ingredients:</span>
+                  <span className="title">ingredients:</span>
                   <span>{convertToArray(recipe.ingredients)}</span>
                 </div>
                 <div>
-                  <span className="instruction_title">instructions: </span>
+                  <span className="title">instructions: </span>
                   <span>{recipe.instructions}</span>
                 </div>
                 <Rating edit={edit} recipe={recipe} />

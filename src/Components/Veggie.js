@@ -3,16 +3,16 @@ import shortid from "shortid";
 
 const Veggie = ({ veggie }) => {
   return (
-    <div className="container-fluid">
+    <div className="container">
       {veggie.map(each => {
         return (
-          <div className="card" key={each.recipe.calories}>
-            <div className="card_title">
-              <img className="img-thumbnail" src={each.recipe.image} />
-              <span className="recipe_title">{each.recipe.label}</span>
+          <div className="jumbotron" id="card" key={each.recipe.calories}>
+            <div className="inline">
+              <img className="img-thumbnail-lg" src={each.recipe.image} />
+              <h1>{each.recipe.label}</h1>
             </div>
             <ul>
-              <span className="ingredient_title">ingredients:</span>
+              <span className="title">ingredients:</span>
               {each.recipe.ingredientLines.map(ing => {
                 return <li key={shortid.generate()}>{ing}</li>;
               })}

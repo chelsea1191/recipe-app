@@ -66,24 +66,50 @@ const App = () => {
     <div className="App">
       <Router>
         <div>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-light">
             <li className="nav-link active">
-              <Link to="/">Home</Link>
+              <img
+                src="/assets/home.png"
+                alt=""
+                width="32"
+                height="32"
+                title="Bootstrap"
+              ></img>
+              <Link className="link" to="/">
+                Home
+              </Link>
             </li>
             <li className="nav-link">
-              <Link to="/family">Family</Link>
+              <Link className="link" to="/family">
+                Family
+              </Link>
             </li>
             <li className="nav-link">
-              <Link to="/chicken">Chicken</Link>
+              <Link className="link" to="/chicken">
+                Chicken
+              </Link>
             </li>
             <li className="nav-link">
-              <Link to="/beef">Beef</Link>
+              <Link className="link" to="/beef">
+                Beef
+              </Link>
             </li>
             <li className="nav-link">
-              <Link to="/veggie">Veggie</Link>
+              <Link className="link" to="/veggie">
+                Veggie
+              </Link>
             </li>
             <li className="nav-link">
-              <Link to="/search">Search</Link>
+              <img
+                src="/assets/search.png"
+                alt=""
+                width="32"
+                height="32"
+                title="Bootstrap"
+              ></img>
+              <Link className="link" to="/search">
+                Search
+              </Link>
             </li>
           </nav>
           <hr />
