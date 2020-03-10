@@ -9,13 +9,13 @@ const Home = () => {
         of the links above to begin.
       </p>
       <hr className="my-4" />
-      <p>
+      <p className="lead">
         All of the recipes (besides those listed under the Family tab) are
         pulled from the Edamam API{" "}
       </p>
-      <img className="img-thumbnail-lg" src="./assets/edamam.jpg" />
+      <img className="img-thumbnail lead" src="./assets/edamam.jpg" />
       <a
-        className="btn btn-secondary"
+        className="btn btn-secondary lead"
         href="https://developer.edamam.com/edamam-docs-recipe-api"
         target="_blank"
         role="button"

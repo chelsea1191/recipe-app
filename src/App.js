@@ -68,15 +68,14 @@ const App = () => {
         <div>
           <nav className="navbar navbar-expand-lg navbar-light">
             <li className="nav-link active">
-              <img
-                src="/assets/home.png"
-                alt=""
-                width="32"
-                height="32"
-                title="Bootstrap"
-              ></img>
               <Link className="link" to="/">
-                Home
+                <img
+                  src="/assets/home.png"
+                  alt=""
+                  width="32"
+                  height="32"
+                  title="Bootstrap"
+                ></img>
               </Link>
             </li>
             <li className="nav-link">
@@ -100,15 +99,14 @@ const App = () => {
               </Link>
             </li>
             <li className="nav-link">
-              <img
-                src="/assets/search.png"
-                alt=""
-                width="32"
-                height="32"
-                title="Bootstrap"
-              ></img>
               <Link className="link" to="/search">
-                Search
+                <img
+                  src="/assets/search.png"
+                  alt=""
+                  width="32"
+                  height="32"
+                  title="Bootstrap"
+                ></img>
               </Link>
             </li>
           </nav>

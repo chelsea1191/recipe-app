@@ -34,56 +34,51 @@ const Family = ({ recipes, setRecipes }) => {
     );
   };
   return (
-    <div className="container">
+    <div>
       <Form recipes={recipes} setRecipes={setRecipes} />
-      <ul>
+      <div className="container">
         {recipes.map(recipe => {
           return (
-            <div key={recipe.id}>
-              <div className="jumbotron" id="card">
-                <div className="inline">
-                  <img className="img-thumbnail" src="./assets/icon.png" />
-                  <h1> {recipe.title}</h1>
-                </div>
-                <div>
-                  <span className="title">ingredients:</span>
-                  <span>{convertToArray(recipe.ingredients)}</span>
-                </div>
-                <div>
-                  <span className="title">instructions: </span>
-                  <span>{recipe.instructions}</span>
-                </div>
-                <Rating edit={edit} recipe={recipe} />
-                <div className="dropdown">
+            <div className="jumbotron" key={recipe.id} id="card">
+              <div className="inline">
+                <img className="img-thumbnail" src="./assets/icon.png" />
+                <h1> {recipe.title}</h1>
+              </div>
+              <div>
+                <span className="title">ingredients:</span>
+                <span>{convertToArray(recipe.ingredients)}</span>
+              </div>
+              <div>
+                <span className="title">instructions: </span>
+                <span>{recipe.instructions}</span>
+              </div>
+              <Rating edit={edit} recipe={recipe} />
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu2"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Action
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <button
-                    className="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    id="dropdownMenu2"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type="submit"
+                    value="delete"
+                    className="dropdown-item"
+                    onClick={() => destroy(recipe.id)}
                   >
-                    Action
+                    delete
                   </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenu2"
-                  >
-                    <button
-                      type="submit"
-                      value="delete"
-                      className="dropdown-item"
-                      onClick={() => destroy(recipe.id)}
-                    >
-                      delete
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };
